@@ -35,7 +35,7 @@ abstract class BaseModel
 
     public function updateById($id, $params)
     {
-        $this->db->update($this->table, $params, ['id'=>$id]);
+        $this->db->update($this->table, $params, "id = $id");
     }
 
     public function addNew($params)

@@ -38,33 +38,25 @@ class DBDriver
         return $this->pdo->lastInsertId();
     }
 
-    public function update($table, array $params, array $where)
+    public function update($table, array $params, $where)
     {
+        $columns = '';
         foreach ($params as $key => $value){
             $columns .=  sprintf('%s=:%s, ', $key, $key);
         }
 
-        foreach ($where as $key => $value){
-            $where_col = sprintf('%s=:%s', $key, $key);
-        }
-
         $columns = substr($columns, 0, -2);
-        $masks = array_merge($params, $where);
 
-        $sql = sprintf('UPDATE %s SET dt=NOW(), %s WHERE %s', $table, $columns, $where_col);
+        $sql = sprintf('UPDATE %s SET dt=NOW(), %s WHERE %s', $table, $columns, $where);
 
         $query = $this->pdo->prepare($sql);
-        $query->execute($masks);
+        $query->execute($params);
     }
 
-    public function delete($table, array $where)
+    public function delete($table, $where)
     {
-        foreach ($where as $key => $value){
-            $where_col = sprintf('%s=:%s', $key, $key);
-        }
-
-        $sql = sprintf('DELETE FROM %s WHERE %s', $table, $where_col);
+        $sql = sprintf('DELETE FROM %s WHERE %s', $table, $where);
         $query = $this->db->prepare($sql);
-        $query->execute($where);
+        $query->execute();
     }
 }
