@@ -2,28 +2,34 @@
 
 namespace models;
 
-use core\DB;
+use core\DBDriver;
+use core\Validator;
 
 class UsersModel extends BaseModel
 {
     protected $table = 'users';
+    protected $schema = [
+        'id' => [
+            'primary' => true,
+            'type' => Validator::INTEGER
+        ],
+        'user_name' => [
+            'type' => Validator::STRING,
+            'length' => [5, 50],
+            'not_blank' => true,
+            'require' => true
+        ],
+        'user_password' => [
+            'type' => Validator::STRING,
+            'length' => [5, 50],
+            'require' => true,
+            'not_blank' => true,
+        ]
+    ];
 
-    public function __construct(\PDO $db)
+    public function __construct(DBDriver $db, Validator $validator)
     {
-        parent::__construct($db, $this->table);
-    }
-
-    public function updateById($id, $user_name, $password)
-    {
-        $sql = sprintf('UPDATE %s SET user_name=:n, user_password=:p WHERE id=:id', $this->table);
-        $query = $this->db->prepare($sql);
-        $query->execute(['n' => $user_name, 'p' => $password, 'id'=>$id]);
-    }
-
-    public function addUser($user_name, $password)
-    {
-        $sql = sprintf('INSERT INTO %s (user_name, user_password) VALUES (:n,:p)', $this->table);
-        $query = $this->db->prepare($sql);
-        $query->execute(['n' => $user_name, 'p' => $password]);
+        parent::__construct($db, $validator, $this->table);
+        $this->validator->setRules($this->schema);
     }
 }

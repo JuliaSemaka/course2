@@ -25,7 +25,7 @@ class BaseController
 
     public function render()
     {
-        echo $this->build(__DIR__ . '/../views/main.html.php', [
+        echo $this->build(NewsController::ROOT .'main.html.php', [
             'title' => $this->title,
             'content' => $this->content
         ]);
@@ -38,7 +38,7 @@ class BaseController
         if(DEV) {
             $err['trace'] = $trace;
         }
-        $this->content = $this->build(ROOT . 'errorEx.html.php', ['err' => $err]);
+        $this->content = $this->build(NewsController::ROOT . 'errorEx.html.php', ['err' => $err]);
     }
 
     protected function build($template, array $params = [])

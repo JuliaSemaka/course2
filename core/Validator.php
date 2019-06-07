@@ -44,9 +44,9 @@ class Validator
             }
 
             if (empty($this->errors[$name]) && isset($field[$name])) {
-                if (isset($rule['type']) && $rule['type'] === STRING) {
+                if (isset($rule['type']) && $rule['type'] === self::STRING) {
                     $this->clean[$name] = htmlspecialchars(trim($field[$name]));
-                } elseif (isset($rule['type']) && $rule['type'] === INTEGER || $rule['type'] === INT) {
+                } elseif (isset($rule['type']) && $rule['type'] === self::INTEGER || $rule['type'] === self::INT) {
                     $this->clean[$name] = (int)$field[$name];
                 } else {
                     $this->clean[$name] = $field[$name];
@@ -57,12 +57,9 @@ class Validator
 //        var_dump($this->errors, $this->clean);
 //        die;
 //        echo "</pre>";
-
         if (empty($this->errors)) {
             $this->success = true;
         }
-
-
     }
 
     public function setRules(array $rules)

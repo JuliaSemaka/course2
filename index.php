@@ -28,8 +28,8 @@ switch ($controller) {
     case 'news':
         $controller = 'News';
         break;
-    case 'user':
-        $controller = 'User';
+    case 'users':
+        $controller = 'Users';
         break;
     default:
         header("HTTP/1.0 404 Not Found");
@@ -45,6 +45,18 @@ if(isset($uri[1]) && is_numeric($uri[1])){
 }
 
 $action = isset($uri[1]) && $uri[1] != '' && is_string($uri[1]) ? $uri[1] : 'index';
+
+$actionParts = explode('_', $action);
+for ($i=1; $i<count($actionParts); $i++) {
+    if (!isset($actionParts[$i])) {
+        continue;
+    }
+
+    $actionParts[$i] = ucfirst($actionParts[$i]);
+}
+
+$action = implode('', $actionParts);
+
 $action = sprintf('%sAction', $action);
 
 //if(!method_exists(sprintf('controller\%sController', $controller), $action)){
@@ -71,5 +83,3 @@ $controller = new $controller($request);
     $controller->errorHandler($e->getMessage(), $e->getTrace());
 }
 $controller->render();
-
-die();

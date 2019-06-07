@@ -16,6 +16,6 @@ class ModelIncorrectDataException extends \Exception
 
     public function getErrors()
     {
-        return$this->errors;
+        return $this->errors;
     }
 }

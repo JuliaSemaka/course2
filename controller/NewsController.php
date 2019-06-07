@@ -8,10 +8,10 @@ use core\Validator;
 use models\NewsModel;
 use core\DB;
 
-define("ROOT", "__DIR__ . '/../views/");
-
 class NewsController extends BaseController
 {
+    const ROOT = "__DIR__ . '/../views/";
+
     public function indexAction()
     {
         $this->title .= '::список всех статей';
@@ -22,7 +22,7 @@ class NewsController extends BaseController
             );
         $news = $mNews->getAll(['is_moderate' => '1']);
 
-        $this->content = $this->build(ROOT . 'news.html.php', ['news' => $news]);
+        $this->content = $this->build(self::ROOT . 'news.html.php', ['news' => $news]);
     }
 
     public function oneAction()
@@ -37,7 +37,7 @@ class NewsController extends BaseController
         );
         $news = $mNews->getById(['id' => $id]);
 
-        $this->content = $this->build(ROOT . 'one_news.html.php', ['news' => $news]);
+        $this->content = $this->build(self::ROOT . 'one_news.html.php', ['news' => $news]);
     }
 
     public function editAction()
@@ -55,7 +55,7 @@ class NewsController extends BaseController
         if($this->request->isGet()){
             $news = $mNews->getById(['id' => $id]);
 
-            $this->content = $this->build(ROOT . 'edit.html.php', ['news' => $news]);
+            $this->content = $this->build(self::ROOT . 'edit.html.php', ['news' => $news]);
         }
 
         if($this->request->isPost()){
@@ -73,7 +73,7 @@ class NewsController extends BaseController
     {
         if($this->request->isGet()) {
             $this->title = 'Новая статья';
-            $this->content = $this->build(ROOT . 'add_new.html.php');
+            $this->content = $this->build(self::ROOT . 'add_new.html.php');
         }
 
         if($this->request->isPost()){
@@ -92,7 +92,7 @@ class NewsController extends BaseController
                 $err['message'] = $e->getMessage();
                 $err['trace'] = $e->getTrace();
                 $err['errors'] = $e->getErrors();
-                $this->content = $this->build(ROOT . 'errorEx.html.php', ['err' => $err]);
+                $this->content = $this->build(self::ROOT . 'sign_up.html.php', ['err' => $err]);
             }
         }
     }
