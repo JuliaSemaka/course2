@@ -43,6 +43,10 @@ class Validator
                 $this->errors[$name][] = sprintf('Field %s should not be empty', $name);
             }
 
+            if (isset($rule['must_be_equal']) && $field[$name] !== $field[$rule['must_be_equal']]) {
+                $this->errors[$name][] = sprintf('Does not match the password', $name);
+            }
+
             if (empty($this->errors[$name]) && isset($field[$name])) {
                 if (isset($rule['type']) && $rule['type'] === self::STRING) {
                     $this->clean[$name] = htmlspecialchars(trim($field[$name]));

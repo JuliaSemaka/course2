@@ -25,7 +25,11 @@ class UsersController extends BaseController
             );
 
             try {
-                $mUsers->addNew(['user_name' => $this->request->post('user_name'), 'user_password' => $this->request->post('user_password')]);
+                $mUsers->addNew([
+                    'user_name' => $this->request->post('user_name'),
+                    'user_password' => $this->request->post('user_password'),
+                    'user_password_repeat' => $this->request->post('user_password_repeat')
+                ]);
                 $this->redirect('/');
             } catch (ModelIncorrectDataException $e) {
                 $err['errors'] = $e->getErrors();

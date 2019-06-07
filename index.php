@@ -46,16 +46,18 @@ if(isset($uri[1]) && is_numeric($uri[1])){
 
 $action = isset($uri[1]) && $uri[1] != '' && is_string($uri[1]) ? $uri[1] : 'index';
 
-$actionParts = explode('_', $action);
-for ($i=1; $i<count($actionParts); $i++) {
-    if (!isset($actionParts[$i])) {
-        continue;
+if(strpos($action, '_') != false) {
+    $actionParts = explode('_', $action);
+    for ($i=1; $i<count($actionParts); $i++) {
+        if (!isset($actionParts[$i])) {
+            continue;
+        }
+
+        $actionParts[$i] = ucfirst($actionParts[$i]);
     }
 
-    $actionParts[$i] = ucfirst($actionParts[$i]);
+    $action = implode('', $actionParts);
 }
-
-$action = implode('', $actionParts);
 
 $action = sprintf('%sAction', $action);
 

@@ -24,6 +24,9 @@ class UsersModel extends BaseModel
             'length' => [5, 50],
             'require' => true,
             'not_blank' => true,
+        ],
+        'user_password_repeat' => [
+            'must_be_equal' => 'user_password'
         ]
     ];
 
