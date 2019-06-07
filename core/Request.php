@@ -37,7 +37,7 @@ class Request
     private function getMethod($method, $key = null)
     {
         if(!$key){
-            return $$method;
+            return $method;
         }
         if(isset($method[$key])){
             return $method[$key];

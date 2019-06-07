@@ -3,6 +3,7 @@
 namespace controller;
 
 use core\DBDriver;
+use core\User;
 use core\Validator;
 use models\UsersModel;
 use core\DB;
@@ -24,19 +25,29 @@ class UsersController extends BaseController
                 new Validator()
             );
 
+            $user = new User($mUsers);
+
             try {
-                $mUsers->addNew([
-                    'user_name' => $this->request->post('user_name'),
-                    'user_password' => $this->request->post('user_password'),
-                    'user_password_repeat' => $this->request->post('user_password_repeat')
-                ]);
+                $user->signUp($this->request->post());
                 $this->redirect('/');
             } catch (ModelIncorrectDataException $e) {
-                $err['errors'] = $e->getErrors();
-                $err['user_name'] = $this->request->post('user_name');
-                $err['user_password'] = $this->request->post('user_password');
-                $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['err' => $err]);
+                $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['err' => $e->getErrors(), 'user' => $this->request->post()]);
             }
+
+
+//            try {
+//                $mUsers->addNew([
+//                    'user_name' => $this->request->post('user_name'),
+//                    'user_password' => $this->request->post('user_password')
+//                ]);
+//                $this->redirect('/');
+//            } catch (ModelIncorrectDataException $e) {
+//                $err['errors'] = $e->getErrors();
+//                $err['user_name'] = $this->request->post('user_name');
+//                $err['user_password'] = $this->request->post('user_password');
+//                $err['user_password_repeat'] = $this->request->post('user_password_repeat');
+//                $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['err' => $err]);
+//            }
         }
     }
 }

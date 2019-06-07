@@ -3,10 +3,12 @@
 namespace models;
 
 use core\DBDriver;
+use core\Exception\ModelIncorrectDataException;
 use core\Validator;
 
 class UsersModel extends BaseModel
 {
+    const MD5_ADD = 'wqwertry';
     protected $table = 'users';
     protected $schema = [
         'id' => [
@@ -34,5 +36,24 @@ class UsersModel extends BaseModel
     {
         parent::__construct($db, $validator, $this->table);
         $this->validator->setRules($this->schema);
+    }
+
+    public function signUp(array $field)
+    {
+        $this->validator->execute($field);
+
+        if(!$this->validator->success) {
+            throw new ModelIncorrectDataException($this->validator->errors);
+        }
+
+        $this->addNew([
+            'user_name' => $this->validator->clean['user_name'],
+            'user_password' => $this->getHash($this->validator->clean['user_password'])
+        ], false);
+    }
+
+    public function getHash($password)
+    {
+        return md5($password . self::MD5_ADD);
     }
 }

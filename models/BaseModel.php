@@ -38,13 +38,16 @@ abstract class BaseModel
         $this->db->update($this->table, $params, "id = $id");
     }
 
-    public function addNew($params)
+    public function addNew($params, $needValidator = true)
     {
-        $this->validator->execute($params);
+        if($needValidator){
+            $this->validator->execute($params);
 
-        if(!$this->validator->success) {
-            throw new ModelIncorrectDataException($this->validator->errors);
+            if(!$this->validator->success) {
+                throw new ModelIncorrectDataException($this->validator->errors);
+            }
         }
+
         return $this->db->insert($this->table, $params);
     }
 
