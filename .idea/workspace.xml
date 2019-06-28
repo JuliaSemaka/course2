@@ -159,7 +159,7 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-10" />
     <option name="y" value="25" />
     <option name="width" value="1648" />
@@ -258,7 +258,7 @@
     <option name="totallyTimeSpent" value="79871000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="20" width="1318" height="788" extended-state="0" />
+    <frame x="-8" y="20" width="1318" height="788" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10651828" />
