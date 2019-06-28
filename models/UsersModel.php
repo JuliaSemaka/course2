@@ -26,9 +26,6 @@ class UsersModel extends BaseModel
             'length' => [5, 50],
             'require' => true,
             'not_blank' => true,
-        ],
-        'user_password_repeat' => [
-            'must_be_equal' => 'user_password'
         ]
     ];
 
@@ -50,6 +47,25 @@ class UsersModel extends BaseModel
             'user_name' => $this->validator->clean['user_name'],
             'user_password' => $this->getHash($this->validator->clean['user_password'])
         ], false);
+    }
+
+    public function signIn(array $field)
+    {
+        $user_name = $this->validator->clean['user_name'];
+        $user_password = $this->getHash($this->validator->clean['user_password']);
+
+        $this->validator->execute($field);
+
+        if(!$this->validator->success) {
+            throw new ModelIncorrectDataException($this->validator->errors);
+        }
+
+        if(!$this->db->select(
+            $this->table,
+            sprintf('user_name = \'%s\' AND user_password = \'%s\'', $user_name, $user_password),
+            DBDriver::FETCH_ONE)) {
+            throw new ModelIncorrectDataException(['no_such_user' => 'No such user']);
+        }
     }
 
     public function getHash($password)

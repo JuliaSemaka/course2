@@ -1,6 +1,7 @@
 <?if($news === false):?>
     Нет статей
 <?else:?>
+    <a href="/users/sign_in">Вход</a><hr>
     <a href="/users/sign_up">Регистрация</a><hr>
     <h2>Список статей</h2>
     <table  border="1" style="text-align: center">

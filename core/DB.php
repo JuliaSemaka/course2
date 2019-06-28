@@ -15,8 +15,12 @@ class DB
 
     private static function getPDO()
     {
+        $opt = [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+        ];
         $dsn = sprintf('%s:host=%s;dbname=%s', 'mysql', 'localhost', 'bdblog');
-        $db = new \PDO($dsn, 'root', '');
+        $db = new \PDO($dsn, 'root', '', $opt);
         $db->exec('SET NAMES UTF8');
         return $db;
     }
@@ -30,13 +34,13 @@ class DB
 //
 //        return $query;
 //    }
+////
+//    public static function db_check_error($query)
+//    {
+//        $info = $query->errorInfo();
 //
-    public static function db_check_error($query)
-    {
-        $info = $query->errorInfo();
-
-        if($info[0] != \PDO::ERR_NONE){
-            exit($info[2]);
-        }
-    }
+//        if($info[0] != \PDO::ERR_NONE){
+//            exit($info[2]);
+//        }
+//    }
 }

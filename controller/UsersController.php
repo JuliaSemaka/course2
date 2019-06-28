@@ -5,9 +5,12 @@ namespace controller;
 use core\DBDriver;
 use core\User;
 use core\Validator;
+use models\SessionModel;
 use models\UsersModel;
 use core\DB;
 use core\Exception\ModelIncorrectDataException;
+use forms\SignUp;
+use core\Forms\FormBuilder;
 
 class UsersController extends BaseController
 {
@@ -15,9 +18,12 @@ class UsersController extends BaseController
     {
         $this->title .= '::Регистрация';
 
-        if($this->request->isGet()){
-            $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', []);
-        }
+        $form = new SignUp($this->request);
+        $formBuilder = new FormBuilder($form);
+
+//        if($this->request->isGet()){
+//            $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', []);
+//        }
 
         if($this->request->isPost()){
             $mUsers = new UsersModel(
@@ -25,29 +31,51 @@ class UsersController extends BaseController
                 new Validator()
             );
 
-            $user = new User($mUsers);
+            $mSession = new SessionModel(
+                new DBDriver(DB::db_connect()),
+                new Validator()
+            );
+
+            $user = new User($mUsers, $mSession);
 
             try {
-                $user->signUp($this->request->post());
+                $user->signUp($form->handleRequest($this->request));
                 $this->redirect('/');
             } catch (ModelIncorrectDataException $e) {
-                $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['err' => $e->getErrors(), 'user' => $this->request->post()]);
+                $form->addErrors($e->getErrors());
+            }
+        }
+
+        $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['form' => $formBuilder]);
+    }
+
+    public function signInAction()
+    {
+        $this->title .= '::Авторизация';
+
+        if($this->request->isGet()){
+            $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', []);
+        }
+
+        if($this->request->isPost()){
+            $mUsers = new UsersModel(
+                new DBDriver(DB::db_connect()),
+                new Validator()
+            );
+            $mSession = new SessionModel(
+                new DBDriver(DB::db_connect()),
+                new Validator()
+            );
+
+            $user = new User($mUsers, $mSession);
+
+            try {
+                $user->signIn($this->request->post());
+                $this->redirect('/');
+            } catch (ModelIncorrectDataException $e) {
+                $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['err' => $e->getErrors(), 'user' => $this->request->post()]);
             }
 
-
-//            try {
-//                $mUsers->addNew([
-//                    'user_name' => $this->request->post('user_name'),
-//                    'user_password' => $this->request->post('user_password')
-//                ]);
-//                $this->redirect('/');
-//            } catch (ModelIncorrectDataException $e) {
-//                $err['errors'] = $e->getErrors();
-//                $err['user_name'] = $this->request->post('user_name');
-//                $err['user_password'] = $this->request->post('user_password');
-//                $err['user_password_repeat'] = $this->request->post('user_password_repeat');
-//                $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['err' => $err]);
-//            }
         }
     }
 }

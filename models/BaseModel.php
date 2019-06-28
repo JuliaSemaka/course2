@@ -18,7 +18,7 @@ abstract class BaseModel
         $this->validator = $validator;
     }
 
-    public function getAll($params = [])
+    public function getAll($params = '')
     {
         return $this->db->select($this->table, $params);
     }

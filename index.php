@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use core\DB;
 use models\UsersModel;
 use models\NewsModel;

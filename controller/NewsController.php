@@ -20,7 +20,7 @@ class NewsController extends BaseController
             new DBDriver(DB::db_connect()),
             new Validator()
             );
-        $news = $mNews->getAll(['is_moderate' => '1']);
+        $news = $mNews->getAll('is_moderate = \'1\'');
 
         $this->content = $this->build(self::ROOT . 'news.html.php', ['news' => $news]);
     }
@@ -35,7 +35,7 @@ class NewsController extends BaseController
             new DBDriver(DB::db_connect()),
             new Validator()
         );
-        $news = $mNews->getById(['id' => $id]);
+        $news = $mNews->getById(sprintf('id = \'%s\'', $id));
 
         $this->content = $this->build(self::ROOT . 'one_news.html.php', ['news' => $news]);
     }

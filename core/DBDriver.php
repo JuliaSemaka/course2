@@ -14,14 +14,11 @@ class DBDriver
         $this->pdo = $pdo;
     }
 
-    public function select($table, array $where = [], $fetch = self::FETCH_ALL)
+    public function select($table, $where = '', $fetch = self::FETCH_ALL)
     {
-        foreach ($where as $key => $value){
-            $where_col = sprintf('%s=:%s', $key, $key);
-        }
-        $sql = sprintf('SELECT * FROM %s WHERE %s', $table, $where_col);
+        $sql = sprintf('SELECT * FROM %s WHERE %s', $table, $where);
         $query = $this->pdo->prepare($sql);
-        $query->execute($where);
+        $query->execute();
         return $fetch === self::FETCH_ALL ? $query->fetchAll() : $query->fetch();
     }
 
