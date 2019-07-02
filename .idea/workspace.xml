@@ -4,25 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/models/UsersModel.php" line="72" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a616490-3d88-47cf-bca6-2131ef9c4359" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/core/Forms/Form.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/Forms/FormBuilder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forms/SignUp.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/SessionModel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/sign_in.html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/DB.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/DB.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/DBDriver.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/DBDriver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UsersModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UsersModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/news.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/news.html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/sign_up.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/sign_up.html.php" afterDir="false" />
-    </list>
+    <list default="true" id="6a616490-3d88-47cf-bca6-2131ef9c4359" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="187">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="e#30#48#0#PHP" expanded="true" />
               </folding>
@@ -242,7 +224,7 @@
       <workItem from="1559554406954" duration="599000" />
       <workItem from="1559803577757" duration="41754000" />
       <workItem from="1560408526399" duration="1975000" />
-      <workItem from="1561353456926" duration="34757000" />
+      <workItem from="1561353456926" duration="35356000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1558960587835</created>
@@ -255,7 +237,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79871000" />
+    <option name="totallyTimeSpent" value="80470000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="20" width="1318" height="788" extended-state="1" />
@@ -522,8 +504,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/UsersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="187">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="e#30#48#0#PHP" expanded="true" />
           </folding>
