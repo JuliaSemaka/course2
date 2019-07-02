@@ -1,5 +1,6 @@
 <a href="/">Вернуться назад</a><hr>
 <form method="post">
+<!--    --><?//var_dump($err);?>
     Введите имя<br>
     <input type="text" name="user_name" value="<?=$user['user_name']?>"><br>
     <?if(isset($err['user_name'])):?>
@@ -14,7 +15,7 @@
             <p style="font: 12px small-caption; color: red; margin: 0"><?=$value?></p>
         <?endforeach;?>
     <?endif;?>
-    <?if($err['no_such_user']):?>
+    <?if(isset($err['no_such_user'])):?>
         <p style="font: small-caption; color: red; margin: 0"><?=$err['no_such_user']?></p>
     <?endif;?>
     <input type="checkbox" name="remember">Запомнить<br>

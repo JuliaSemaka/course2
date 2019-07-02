@@ -51,19 +51,16 @@ class UsersModel extends BaseModel
 
     public function signIn(array $field)
     {
-        $user_name = $this->validator->clean['user_name'];
-        $user_password = $this->getHash($this->validator->clean['user_password']);
-
         $this->validator->execute($field);
 
         if(!$this->validator->success) {
             throw new ModelIncorrectDataException($this->validator->errors);
         }
 
-        if(!$this->db->select(
-            $this->table,
-            sprintf('user_name = \'%s\' AND user_password = \'%s\'', $user_name, $user_password),
-            DBDriver::FETCH_ONE)) {
+        $user_name = $this->validator->clean['user_name'];
+        $user_password = $this->getHash($this->validator->clean['user_password']);
+
+        if(!$this->getById(sprintf('user_name = \'%s\' AND user_password = \'%s\'', $user_name, $user_password))) {
             throw new ModelIncorrectDataException(['no_such_user' => 'No such user']);
         }
     }

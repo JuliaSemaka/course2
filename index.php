@@ -46,7 +46,7 @@ if(isset($uri[1]) && is_numeric($uri[1])){
 
 $action = isset($uri[1]) && $uri[1] != '' && is_string($uri[1]) ? $uri[1] : 'index';
 
-if(strpos($action, '_') != false) {
+if(strpos($action, '_')) {
     $actionParts = explode('_', $action);
     for ($i=1; $i<count($actionParts); $i++) {
         if (!isset($actionParts[$i])) {

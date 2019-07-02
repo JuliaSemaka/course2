@@ -21,7 +21,6 @@ class User
     public function signUp(array $fields)
     {
         if(!$this->comparePass($fields)) {
-            $errors =[];
             $errors['user_password_repeat'][] = sprintf('%s', 'Does not match the password');
             throw new ModelIncorrectDataException($errors);
         }
@@ -30,6 +29,9 @@ class User
 
     public function signIn(array $fields)
     {
+//        var_dump($fields);
+//        die;
+
         $this->mUser->signIn($fields);
 
         if (isset($fields['remember'])) {
@@ -37,9 +39,7 @@ class User
             setcookie('password', $this->mUser->getHash($fields['user_password']), time()+3600*24*7, '/');
         }
 
-        $_SESSION['sid'] = true;
-        $_SESSION['name'] = $fields['user_name'];
-        $_SESSION['pass'] = $this->mUser->getHash($fields['user_password']);
+        $_SESSION['is_auth'] = true;
     }
 
     public function isAuth(Request $request)

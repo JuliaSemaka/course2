@@ -53,9 +53,10 @@ class UsersController extends BaseController
     {
         $this->title .= '::Авторизация';
 
-        if($this->request->isGet()){
-            $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', []);
-        }
+//        if($this->request->isGet()){
+//            $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', []);
+//        }
+        $err = '';
 
         if($this->request->isPost()){
             $mUsers = new UsersModel(
@@ -73,9 +74,13 @@ class UsersController extends BaseController
                 $user->signIn($this->request->post());
                 $this->redirect('/');
             } catch (ModelIncorrectDataException $e) {
-                $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['err' => $e->getErrors(), 'user' => $this->request->post()]);
+                $err = $e->getErrors();
             }
 
         }
+
+//        var_dump('111111');
+//        die;
+        $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['err' => $err, 'user' => $this->request->post()]);
     }
 }
