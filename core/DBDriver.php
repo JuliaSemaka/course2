@@ -22,6 +22,13 @@ class DBDriver
         return $fetch === self::FETCH_ALL ? $query->fetchAll() : $query->fetch();
     }
 
+    public function selectJoin($sql)
+    {
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+
     public function insert($table, array $params)
     {
         $columns = sprintf('(%s)', implode(', ', array_keys($params)));

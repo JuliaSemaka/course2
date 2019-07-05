@@ -36,7 +36,7 @@ class UsersController extends BaseController
                 new Validator()
             );
 
-            $user = new User($mUsers, $mSession);
+            $user = new User($mUsers, $mSession, $this->request);
 
             try {
                 $user->signUp($form->handleRequest($this->request));
@@ -53,22 +53,25 @@ class UsersController extends BaseController
     {
         $this->title .= '::Авторизация';
 
-//        if($this->request->isGet()){
-//            $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', []);
-//        }
-        $err = '';
+        $mUsers = new UsersModel(
+            new DBDriver(DB::db_connect()),
+            new Validator()
+        );
+
+        $mSession = new SessionModel(
+            new DBDriver(DB::db_connect()),
+            new Validator()
+        );
+
+        $user = new User($mUsers, $mSession, $this->request);
+
+        if ($user->isAuth()) {
+//            $this->redirect('/');
+        }
 
         if($this->request->isPost()){
-            $mUsers = new UsersModel(
-                new DBDriver(DB::db_connect()),
-                new Validator()
-            );
-            $mSession = new SessionModel(
-                new DBDriver(DB::db_connect()),
-                new Validator()
-            );
 
-            $user = new User($mUsers, $mSession);
+//            $user->isAuth($this->request);
 
             try {
                 $user->signIn($this->request->post());
@@ -76,11 +79,8 @@ class UsersController extends BaseController
             } catch (ModelIncorrectDataException $e) {
                 $err = $e->getErrors();
             }
-
         }
 
-//        var_dump('111111');
-//        die;
         $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['err' => $err, 'user' => $this->request->post()]);
     }
 }

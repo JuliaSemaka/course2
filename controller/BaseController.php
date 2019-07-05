@@ -25,7 +25,7 @@ class BaseController
 
     public function render()
     {
-        echo $this->build(NewsController::ROOT .'main.html.php', [
+        echo $this->build(NewsController::ROOT . 'main.html.php', [
             'title' => $this->title,
             'content' => $this->content
         ]);
@@ -35,7 +35,7 @@ class BaseController
     {
         $this->title = $message;
         $err['message'] = $message;
-        if(DEV) {
+        if (DEV) {
             $err['trace'] = $trace;
         }
         $this->content = $this->build(NewsController::ROOT . 'errorEx.html.php', ['err' => $err]);

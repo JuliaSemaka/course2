@@ -21,6 +21,7 @@ class Validator
         }
 
         foreach ($this->rules as $name => $rule) {
+
             //не существует обязательного поля
             if (!isset($field[$name])  && isset($rule['require'])) {
                 $this->errors[$name][] = sprintf('Field %s is require!', $name);
@@ -53,10 +54,7 @@ class Validator
                 }
             }
         }
-//        echo "<pre>";
-//        var_dump($this->errors, $this->clean);
-//        die;
-//        echo "</pre>";
+
         if (empty($this->errors)) {
             $this->success = true;
         }

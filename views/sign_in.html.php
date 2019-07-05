@@ -1,6 +1,6 @@
 <a href="/">Вернуться назад</a><hr>
 <form method="post">
-<!--    --><?//var_dump($err);?>
+<!--    <pre>--><?//var_dump($err);?><!--</pre>-->
     Введите имя<br>
     <input type="text" name="user_name" value="<?=$user['user_name']?>"><br>
     <?if(isset($err['user_name'])):?>

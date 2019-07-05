@@ -60,9 +60,18 @@ class UsersModel extends BaseModel
         $user_name = $this->validator->clean['user_name'];
         $user_password = $this->getHash($this->validator->clean['user_password']);
 
-        if(!$this->getById(sprintf('user_name = \'%s\' AND user_password = \'%s\'', $user_name, $user_password))) {
+        $user = $this->getByUser(sprintf('user_name = \'%s\' AND user_password = \'%s\'', $user_name, $user_password));
+
+        if(!$user) {
             throw new ModelIncorrectDataException(['no_such_user' => 'No such user']);
         }
+
+        return $user;
+    }
+
+    public function getByUser($user)
+    {
+        return $this->db->select($this->table, $user, DBDriver::FETCH_ONE);
     }
 
     public function getHash($password)

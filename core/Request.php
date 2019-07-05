@@ -34,12 +34,22 @@ class Request
         return $this->getMethod($this->post, $key);
     }
 
+    public function cookie($key = null)
+    {
+        return $this->getMethod($this->cookie, $key);
+    }
+
+    public function session($key = null)
+    {
+        return $this->getMethod($this->session, $key);
+    }
+
     private function getMethod($method, $key = null)
     {
-        if(!$key){
+        if (!$key) {
             return $method;
         }
-        if(isset($method[$key])){
+        if (isset($method[$key])) {
             return $method[$key];
         }
         return null;
