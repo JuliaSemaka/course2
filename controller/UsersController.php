@@ -5,6 +5,7 @@ namespace controller;
 use core\DBDriver;
 use core\User;
 use core\Validator;
+use forms\SignIn;
 use models\SessionModel;
 use models\UsersModel;
 use core\DB;
@@ -20,10 +21,6 @@ class UsersController extends BaseController
 
         $form = new SignUp($this->request);
         $formBuilder = new FormBuilder($form);
-
-//        if($this->request->isGet()){
-//            $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', []);
-//        }
 
         if($this->request->isPost()){
             $mUsers = new UsersModel(
@@ -53,6 +50,9 @@ class UsersController extends BaseController
     {
         $this->title .= '::Авторизация';
 
+        $form = new SignIn($this->request);
+        $formBuilder = new FormBuilder($form);
+
         $mUsers = new UsersModel(
             new DBDriver(DB::db_connect()),
             new Validator()
@@ -74,13 +74,13 @@ class UsersController extends BaseController
 //            $user->isAuth($this->request);
 
             try {
-                $user->signIn($this->request->post());
+                $user->signIn($form->handleRequest($this->request));
                 $this->redirect('/');
             } catch (ModelIncorrectDataException $e) {
-                $err = $e->getErrors();
+                $form->addErrors($e->getErrors());
             }
         }
 
-        $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['err' => $err, 'user' => $this->request->post()]);
+        $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['form' => $formBuilder]);
     }
 }

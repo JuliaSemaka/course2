@@ -63,7 +63,8 @@ class UsersModel extends BaseModel
         $user = $this->getByUser(sprintf('user_name = \'%s\' AND user_password = \'%s\'', $user_name, $user_password));
 
         if(!$user) {
-            throw new ModelIncorrectDataException(['no_such_user' => 'No such user']);
+            $errors['user_password'][] = sprintf('%s', 'Invalid email address or password');
+            throw new ModelIncorrectDataException($errors);
         }
 
         return $user;

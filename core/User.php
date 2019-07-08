@@ -15,7 +15,7 @@ class User
     private $request;
     private $response;
 
-    public function __construct(UsersModel $mUser, SessionModel $mSession,Request $request)
+    public function __construct(UsersModel $mUser, SessionModel $mSession, Request $request)
     {
         $this->mUser = $mUser;
         $this->mSession = $mSession;
@@ -25,10 +25,16 @@ class User
 
     public function signUp(array $fields)
     {
-        if(!$this->comparePass($fields)) {
+        if ($this->mUser->getByUser(sprintf('user_name = \'%s\'', $fields['user_name']))) {
+            $errors['user_name'][] = sprintf('%s', 'User with the same name already exists');
+            throw new ModelIncorrectDataException($errors);
+        }
+
+        if (!$this->comparePass($fields)) {
             $errors['user_password_repeat'][] = sprintf('%s', 'Does not match the password');
             throw new ModelIncorrectDataException($errors);
         }
+
         $this->mUser->signUp($fields);
     }
 
@@ -55,7 +61,7 @@ class User
         $cookieUser = $this->request->cookie('user');
 
         if ($sid) {
-            if (!isset()$this->mSession->getBySid($sid) && $cookieUser) {
+            if (!$this->mSession->getBySid($sid) && $cookieUser) {
                 $user = $this->mUser->getByUser(sprintf('user_name = \'%s\'', $cookieUser));
                 $this->mSession->addSession($sid, $user['id']);
             }

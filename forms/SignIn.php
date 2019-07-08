@@ -5,7 +5,7 @@ namespace forms;
 use core\Forms\Form;
 use core\Request;
 
-class SignUp extends Form
+class SignIn extends Form
 {
     public function __construct(Request $request)
     {
@@ -20,23 +20,22 @@ class SignUp extends Form
             [
                 'name' => 'user_password',
                 'type' => 'password',
-                'placeholder' => 'Enter your login',
+                'placeholder' => 'Enter your password',
                 'value' => $request->post('user_password')
             ],
             [
-                'name' => 'user_password_repeat',
-                'type' => 'password',
-                'placeholder' => 'Повторите пароль',
-                'value' => $request->post('user_password_repeat')
+                'name' => 'remember',
+                'type' => 'checkbox',
+                'value' => 'Запомнить'
             ],
             [
                 'type' => 'submit',
-                'value' => 'Зарегистрироваться'
+                'value' => 'Войти'
             ]
         ];
 
-        $this->formName = 'sign-up';
+        $this->formName = 'sign-in';
         $this->method = 'POST';
-        $this->class = 'form sign-up';
+        $this->class = 'form sign-in';
     }
 }
