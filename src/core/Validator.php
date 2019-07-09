@@ -1,8 +1,8 @@
 <?php
 
-namespace Project\Phpblog\core;
+namespace JuliaYatsko\course2\core;
 
-use Exception\ValidatorException;
+use JuliaYatsko\course2\core\Exception\ValidatorException;
 
 class Validator
 {

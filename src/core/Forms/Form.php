@@ -1,8 +1,8 @@
 <?php
 
-namespace Project\Phpblog\core\Forms;
+namespace JuliaYatsko\course2\core\Forms;
 
-use Project\Phpblog\core\Request;
+use JuliaYatsko\course2\core\Request;
 
 abstract class Form
 {

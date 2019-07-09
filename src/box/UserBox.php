@@ -1,13 +1,13 @@
 <?php
 
-namespace Project\Phpblog\box;
+namespace JuliaYatsko\course2\box;
 
 use Ig0rbm\HandyBox\HandyBoxContainer;
 use Ig0rbm\HandyBox\HandyBoxInterface;
-use Project\Phpblog\core\User;
-use Project\Phpblog\models\SessionModel;
-use Project\Phpblog\models\UsersModel;
-use Project\Phpblog\core\Validator;
+use JuliaYatsko\course2\core\User;
+use JuliaYatsko\course2\models\SessionModel;
+use JuliaYatsko\course2\models\UsersModel;
+use JuliaYatsko\course2\core\Validator;
 
 class UserBox implements HandyBoxInterface
 {

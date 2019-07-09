@@ -2,13 +2,13 @@
 
 require_once __DIR__ . '/bootstrap.php';
 
-use Project\Phpblog\core\DB;
-use Project\Phpblog\models\UsersModel;
-use Project\Phpblog\models\NewsModel;
-use Project\Phpblog\controller\NewsController;
-use Project\Phpblog\controller\BaseController;
-use Project\Phpblog\core\Request;
-use Project\Phpblog\core\Exception\ErrorNotFoundException;
+use JuliaYatsko\course2\core\DB;
+use JuliaYatsko\course2\models\UsersModel;
+use JuliaYatsko\course2\models\NewsModel;
+use JuliaYatsko\course2\controller\NewsController;
+use JuliaYatsko\course2\controller\BaseController;
+use JuliaYatsko\course2\core\Request;
+use JuliaYatsko\course2\core\Exception\ErrorNotFoundException;
 define("DEV", "true");
 
 //function __autoload($classname) {
@@ -80,11 +80,11 @@ if($id){
 
 $request = new Request($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES, $_SESSION);
 
-$controller = sprintf('Project\Phpblog\controller\%sController', $controller);
+$controller = sprintf('JuliaYatsko\course2\controller\%sController', $controller);
 $controller = new $controller($container, $request);
     $controller->$action();
 } catch (\Exception $e) {
-    $controller = sprintf('Project\Phpblog\controller\%sController', 'News');
+    $controller = sprintf('JuliaYatsko\course2\controller\%sController', 'News');
     $controller = new $controller($container);
     $controller->errorHandler($e->getMessage(), $e->getTrace());
 }

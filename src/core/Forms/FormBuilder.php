@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Phpblog\core\Forms;
+namespace JuliaYatsko\course2\core\Forms;
 
 class FormBuilder
 {

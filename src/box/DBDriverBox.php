@@ -1,11 +1,11 @@
 <?php
 
-namespace Project\Phpblog\box;
+namespace JuliaYatsko\course2\box;
 
 use Ig0rbm\HandyBox\HandyBoxContainer;
 use Ig0rbm\HandyBox\HandyBoxInterface;
-use Project\Phpblog\core\DBDriver;
-use Project\Phpblog\core\DB;
+use JuliaYatsko\course2\core\DBDriver;
+use JuliaYatsko\course2\core\DB;
 
 class DBDriverBox implements HandyBoxInterface
 {

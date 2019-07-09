@@ -1,11 +1,11 @@
 <?php
 
-namespace Project\Phpblog\controller;
+namespace JuliaYatsko\course2\controller;
 
-use Project\Phpblog\forms\SignIn;
-use Project\Phpblog\core\Exception\ModelIncorrectDataException;
-use Project\Phpblog\forms\SignUp;
-use Project\Phpblog\core\Forms\FormBuilder;
+use JuliaYatsko\course2\forms\SignIn;
+use JuliaYatsko\course2\core\Exception\ModelIncorrectDataException;
+use JuliaYatsko\course2\forms\SignUp;
+use JuliaYatsko\course2\core\Forms\FormBuilder;
 
 class UsersController extends BaseController
 {

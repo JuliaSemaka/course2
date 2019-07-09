@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Project\\Phpblog\\": "src/"
+            "JuliaYatsko\\course2\\": "src/"
         }
     }
 }

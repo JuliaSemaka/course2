@@ -1,12 +1,12 @@
 <?php
 
-namespace Project\Phpblog\controller;
+namespace JuliaYatsko\course2\controller;
 
-use Project\Phpblog\core\DBDriver;
-use Project\Phpblog\core\Exception\ModelIncorrectDataException;
-use Project\Phpblog\core\Validator;
-use Project\Phpblog\models\NewsModel;
-use Project\Phpblog\core\DB;
+use JuliaYatsko\course2\core\DBDriver;
+use JuliaYatsko\course2\core\Exception\ModelIncorrectDataException;
+use JuliaYatsko\course2\core\Validator;
+use JuliaYatsko\course2\models\NewsModel;
+use JuliaYatsko\course2\core\DB;
 
 class NewsController extends BaseController
 {

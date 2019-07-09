@@ -1,5 +1,5 @@
 <?php
-namespace Project\Phpblog\core;
+namespace JuliaYatsko\course2\core;
 
 class DB
 {

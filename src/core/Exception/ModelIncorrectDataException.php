@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Phpblog\core\Exception;
+namespace JuliaYatsko\course2\core\Exception;
 
 class ModelIncorrectDataException extends \Exception
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Project\Phpblog\controller;
+namespace JuliaYatsko\course2\controller;
 
-use Project\Phpblog\core\Request;
-use Project\Phpblog\core\Exception\ErrorNotFoundException;
+use JuliaYatsko\course2\core\Request;
+use JuliaYatsko\course2\core\Exception\ErrorNotFoundException;
 use Ig0rbm\HandyBox\HandyBoxContainer;
 
 class BaseController

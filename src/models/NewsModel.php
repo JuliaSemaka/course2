@@ -1,9 +1,9 @@
 <?php
 
-namespace Project\Phpblog\models;
+namespace JuliaYatsko\course2\models;
 
-use Project\Phpblog\core\DBDriver;
-use Project\Phpblog\core\Validator;
+use JuliaYatsko\course2\core\DBDriver;
+use JuliaYatsko\course2\core\Validator;
 
 class NewsModel extends BaseModel
 {

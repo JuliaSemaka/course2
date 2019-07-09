@@ -1,8 +1,8 @@
 <?php
 
-namespace Project\Phpblog\forms;
+namespace JuliaYatsko\course2\forms;
 
-use Project\Phpblog\core\Forms\Form;
+use JuliaYatsko\course2\core\Forms\Form;
 
 class SignUp extends Form
 {

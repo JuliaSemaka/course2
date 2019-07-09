@@ -1,12 +1,12 @@
 <?php
 
-namespace Project\Phpblog\core;
+namespace JuliaYatsko\course2\core;
 
-use Project\Phpblog\models\SessionModel;
-use Project\Phpblog\models\UsersModel;
-use Project\Phpblog\core\Exception\ModelIncorrectDataException;
-use Project\Phpblog\core\Request;
-use Project\Phpblog\core\Response;
+use JuliaYatsko\course2\models\SessionModel;
+use JuliaYatsko\course2\models\UsersModel;
+use JuliaYatsko\course2\core\Exception\ModelIncorrectDataException;
+use JuliaYatsko\course2\core\Request;
+use JuliaYatsko\course2\core\Response;
 
 class User
 {

@@ -3,9 +3,9 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Ig0rbm\HandyBox\HandyBoxContainer;
-use Project\Phpblog\box\DBDriverBox;
-use Project\Phpblog\box\ModelsFactory;
-use Project\Phpblog\box\UserBox;
+use JuliaYatsko\course2\box\DBDriverBox;
+use JuliaYatsko\course2\box\ModelsFactory;
+use JuliaYatsko\course2\box\UserBox;
 
 session_start();
 
