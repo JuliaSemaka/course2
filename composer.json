@@ -1,0 +1,13 @@
+{
+    "name": "user/progect-course2",
+    "description": "course 3",
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/dotenv": "^5.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Project\\Phpblog\\": "src/"
+        }
+    }
+}

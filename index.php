@@ -1,15 +1,18 @@
 <?php
 session_start();
-use core\DB;
-use models\UsersModel;
-use models\NewsModel;
-use controller\NewsController;
-use controller\BaseController;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Project\Phpblog\core\DB;
+use Project\Phpblog\models\UsersModel;
+use Project\Phpblog\models\NewsModel;
+use Project\Phpblog\controller\NewsController;
+use Project\Phpblog\controller\BaseController;
 define("DEV", "true");
 
-function __autoload($classname) {
-    include_once __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $classname) . '.php';
-}
+//function __autoload($classname) {
+//    include_once __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $classname) . '.php';
+//}
 
 session_start();
 
@@ -33,7 +36,7 @@ switch ($controller) {
         break;
     default:
         header("HTTP/1.0 404 Not Found");
-        throw new \core\Exception\ErrorNotFoundException();
+        throw new ErrorNotFoundException();
         break;
 }
 
@@ -74,13 +77,13 @@ if($id){
     $_GET['id'] = $id;
 }
 
-$request = new core\Request($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES, $_SESSION);
+$request = new Project\Phpblog\core\Request($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES, $_SESSION);
 
-$controller = sprintf('controller\%sController', $controller);
+$controller = sprintf('Project\Phpblog\controller\%sController', $controller);
 $controller = new $controller($request);
     $controller->$action();
 } catch (\Exception $e) {
-    $controller = sprintf('controller\%sController', 'News');
+    $controller = sprintf('Project\Phpblog\controller\%sController', 'News');
     $controller = new $controller();
     $controller->errorHandler($e->getMessage(), $e->getTrace());
 }
