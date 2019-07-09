@@ -1,13 +1,14 @@
 <?php
-session_start();
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use Project\Phpblog\core\DB;
 use Project\Phpblog\models\UsersModel;
 use Project\Phpblog\models\NewsModel;
 use Project\Phpblog\controller\NewsController;
 use Project\Phpblog\controller\BaseController;
+use Project\Phpblog\core\Request;
+use Project\Phpblog\core\Exception\ErrorNotFoundException;
 define("DEV", "true");
 
 //function __autoload($classname) {
@@ -77,14 +78,14 @@ if($id){
     $_GET['id'] = $id;
 }
 
-$request = new Project\Phpblog\core\Request($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES, $_SESSION);
+$request = new Request($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES, $_SESSION);
 
 $controller = sprintf('Project\Phpblog\controller\%sController', $controller);
-$controller = new $controller($request);
+$controller = new $controller($container, $request);
     $controller->$action();
 } catch (\Exception $e) {
     $controller = sprintf('Project\Phpblog\controller\%sController', 'News');
-    $controller = new $controller();
+    $controller = new $controller($container);
     $controller->errorHandler($e->getMessage(), $e->getTrace());
 }
 $controller->render();

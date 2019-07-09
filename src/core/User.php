@@ -4,7 +4,7 @@ namespace Project\Phpblog\core;
 
 use Project\Phpblog\models\SessionModel;
 use Project\Phpblog\models\UsersModel;
-use Exception\ModelIncorrectDataException;
+use Project\Phpblog\core\Exception\ModelIncorrectDataException;
 use Project\Phpblog\core\Request;
 use Project\Phpblog\core\Response;
 

@@ -3,7 +3,8 @@
     "description": "course 3",
     "minimum-stability": "dev",
     "require": {
-        "symfony/dotenv": "^5.0@dev"
+        "symfony/dotenv": "^5.0@dev",
+        "1g0rbm/handybox": "dev-master"
     },
     "autoload": {
         "psr-4": {

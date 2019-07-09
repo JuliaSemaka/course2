@@ -4,15 +4,19 @@ namespace Project\Phpblog\controller;
 
 use Project\Phpblog\core\Request;
 use Project\Phpblog\core\Exception\ErrorNotFoundException;
+use Ig0rbm\HandyBox\HandyBoxContainer;
 
 class BaseController
 {
     protected $title;
     protected $content;
-    protected $request;
 
-    public function __construct(Request $request = null)
+    protected $request;
+    protected $container;
+
+    public function __construct(HandyBoxContainer $container, Request $request = null)
     {
+        $this->container = $container;
         $this->request = $request;
         $this->title = 'PHP2';
         $this->content = '';

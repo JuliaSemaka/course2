@@ -2,13 +2,7 @@
 
 namespace Project\Phpblog\controller;
 
-use Project\Phpblog\core\DBDriver;
-use Project\Phpblog\core\User;
-use Project\Phpblog\core\Validator;
 use Project\Phpblog\forms\SignIn;
-use Project\Phpblog\models\SessionModel;
-use Project\Phpblog\models\UsersModel;
-use Project\Phpblog\core\DB;
 use Project\Phpblog\core\Exception\ModelIncorrectDataException;
 use Project\Phpblog\forms\SignUp;
 use Project\Phpblog\core\Forms\FormBuilder;
@@ -23,17 +17,20 @@ class UsersController extends BaseController
         $formBuilder = new FormBuilder($form);
 
         if($this->request->isPost()){
-            $mUsers = new UsersModel(
-                new DBDriver(DB::db_connect()),
-                new Validator()
-            );
 
-            $mSession = new SessionModel(
-                new DBDriver(DB::db_connect()),
-                new Validator()
-            );
+//            $mUsers = new UsersModel(
+//                $this->container->get('db-driver'),
+//                new Validator()
+//            );
+//            $mUsers = $this->container->fabricate('factory-models', 'UsersModel');
+//            $mSession = new SessionModel(
+//                $this->container->get('db-driver'),
+//                new Validator()
+//            );
+//            $mSession = $this->container->fabricate('factory-models', 'SessionModel');
+//            $user = new User($mUsers, $mSession, $this->request);
 
-            $user = new User($mUsers, $mSession, $this->request);
+            $user = $this->container->fabricate('user', $this->request);
 
             try {
                 $user->signUp($form->handleRequest($this->request));
@@ -53,17 +50,10 @@ class UsersController extends BaseController
         $form = new SignIn();
         $formBuilder = new FormBuilder($form);
 
-        $mUsers = new UsersModel(
-            new DBDriver(DB::db_connect()),
-            new Validator()
-        );
+//        $mUsers = $this->container->fabricate('factory-models', 'UsersModel');
+//        $mSession = $this->container->fabricate('factory-models', 'SessionModel');
 
-        $mSession = new SessionModel(
-            new DBDriver(DB::db_connect()),
-            new Validator()
-        );
-
-        $user = new User($mUsers, $mSession, $this->request);
+        $user = $this->container->fabricate('user', $this->request);
 
         if ($user->isAuth()) {
 //            $this->redirect('/');
