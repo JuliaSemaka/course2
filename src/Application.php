@@ -9,7 +9,7 @@ use JuliaYatsko\course2\core\http\Request;
 use JuliaYatsko\course2\core\http\Response;
 use JuliaYatsko\course2\core\http\Session;
 use Ig0rbm\HandyBox\HandyBoxContainer;
-use Symfony\Component\Dotenv\Dotenv;
+//use Symfony\Dotenv\Dotenv;
 
 class Application
 {
@@ -23,7 +23,7 @@ class Application
     public function __construct(HandyBoxContainer $container = null)
     {
         $this->enableErrorsHandling();
-        //$this->loadDotEnv();
+//        $this->loadDotEnv();
 
         $this->container = null === $container ? new Container() : $container;
 
@@ -99,11 +99,11 @@ class Application
         $this->request = new Request($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES);
     }
 
-    protected function loadDotEnv()
-    {
-        $dotenv = new Dotenv();
-        $dotenv->load(__DIR__ . '/../.env');
-    }
+//    protected function loadDotEnv()
+//    {
+//        $dotenv = new Dotenv();
+//        $dotenv->load(__DIR__ . '/../.env');
+//    }
 
     public function enableErrorsHandling()
     {
