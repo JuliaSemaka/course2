@@ -1,4 +1,6 @@
 <a href="/">Вернуться назад</a><hr>
+<a href="/users/sign_in">Вход</a><hr>
+
 <form <?=$form->method()?> <?=$form->buildClass()?>>
     <?=$form->inputSign()?>
     <? foreach ($form->fields() as $field):?>

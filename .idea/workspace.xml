@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6a616490-3d88-47cf-bca6-2131ef9c4359" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/boxExample/router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/sign_in.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/sign_in.html.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +34,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -48,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/src/controller/BaseController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="20" selection-end-column="5" />
+              <caret line="20" column="5" selection-start-line="19" selection-start-column="37" selection-end-line="20" selection-end-column="5" />
               <folding>
                 <element signature="e#50#93#0#PHP" expanded="true" />
               </folding>
@@ -65,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/sign_in.html.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="35" selection-start-column="35" selection-end-column="35" />
+            <state relative-caret-position="17">
+              <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -77,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/news.html.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="48" />
+            <state relative-caret-position="17">
+              <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -167,15 +166,15 @@
         <option value="$PROJECT_DIR$/src/models/RoleModel.php" />
         <option value="$PROJECT_DIR$/src/core/DBDriver.php" />
         <option value="$PROJECT_DIR$/src/models/BaseModel.php" />
-        <option value="$PROJECT_DIR$/views/news.html.php" />
         <option value="$PROJECT_DIR$/src/controller/UsersController.php" />
         <option value="$PROJECT_DIR$/src/controller/NewsController.php" />
         <option value="$PROJECT_DIR$/src/core/User.php" />
         <option value="$PROJECT_DIR$/src/core/http/Session.php" />
         <option value="$PROJECT_DIR$/src/forms/News.php" />
-        <option value="$PROJECT_DIR$/views/sign_in.html.php" />
         <option value="$PROJECT_DIR$/.env.example" />
         <option value="$PROJECT_DIR$/src/Application.php" />
+        <option value="$PROJECT_DIR$/views/news.html.php" />
+        <option value="$PROJECT_DIR$/views/sign_in.html.php" />
       </list>
     </option>
   </component>
@@ -208,6 +207,11 @@
             <path>
               <item name="progectCourse2" type="b2602c69:ProjectViewProjectNode" />
               <item name="progectCourse2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="progectCourse2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="progectCourse2" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -298,7 +302,7 @@
       <workItem from="1562653906800" duration="18001000" />
       <workItem from="1562742603172" duration="8851000" />
       <workItem from="1562932454639" duration="7274000" />
-      <workItem from="1563175059410" duration="67067000" />
+      <workItem from="1563175059410" duration="68162000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1558960587835</created>
@@ -311,13 +315,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232994000" />
+    <option name="totallyTimeSpent" value="234089000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="687" y="32" width="850" height="793" extended-state="1" />
+    <frame x="687" y="32" width="850" height="793" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22405063" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18987341" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -698,24 +702,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/news.html.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/forms/News.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/sign_in.html.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="35" selection-start-column="35" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -729,7 +719,7 @@
     <entry file="file://$PROJECT_DIR$/src/controller/BaseController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="20" selection-end-column="5" />
+          <caret line="20" column="5" selection-start-line="19" selection-start-column="37" selection-end-line="20" selection-end-column="5" />
           <folding>
             <element signature="e#50#93#0#PHP" expanded="true" />
           </folding>
@@ -756,6 +746,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/news.html.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/sign_in.html.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
         </state>
       </provider>
     </entry>
