@@ -8,5 +8,8 @@
     Введите текст статьи<br>
     <textarea name="content"><?=$content?></textarea><br>
     <button>Сохранить</button>
+    <?if($err):?>
+        <?=var_dump($err);?>
+    <?endif;?>
 </form>
 <div>

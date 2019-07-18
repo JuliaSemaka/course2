@@ -43,7 +43,7 @@ class UsersModel extends BaseModel
             throw new ModelIncorrectDataException($this->validator->errors);
         }
 
-        $this->addNew([
+        return $this->addNew([
             'user_name' => $this->validator->clean['user_name'],
             'user_password' => $this->getHash($this->validator->clean['user_password'])
         ], false);

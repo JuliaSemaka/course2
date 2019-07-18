@@ -5,6 +5,15 @@ class DB
 {
     private static $instance;
 
+    private function __construct()
+    {
+    }
+
+    private function __clone() {}
+    private function __sleep() {}
+    private function __wakeup() {}
+
+    
     public static function db_connect()
     {
         if(self::$instance === null){
@@ -24,23 +33,4 @@ class DB
         $db->exec('SET NAMES UTF8');
         return $db;
     }
-
-//    public static function db_query($sql, $params = [])
-//    {
-//        $query = $this->db->prepare($sql);
-//        $query->execute($params);
-//
-//        self::db_check_error($query);
-//
-//        return $query;
-//    }
-////
-//    public static function db_check_error($query)
-//    {
-//        $info = $query->errorInfo();
-//
-//        if($info[0] != \PDO::ERR_NONE){
-//            exit($info[2]);
-//        }
-//    }
 }

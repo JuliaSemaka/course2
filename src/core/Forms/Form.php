@@ -2,7 +2,7 @@
 
 namespace JuliaYatsko\course2\core\Forms;
 
-use JuliaYatsko\course2\core\Request;
+use JuliaYatsko\course2\core\http\Request;
 
 abstract class Form
 {
@@ -50,17 +50,27 @@ abstract class Form
 
             $name = $field['name'];
 
-            if ($request->post($name) !== null) {
-                $this->fields[$key]['value'] = $request->post($name);
-                $fields[$name] = $request->post($name);
+            if ($request->post()->get($name) !== null) {
+
+                if ($this->fields[$key]['type'] === 'checkbox') {
+                    $this->setAttribute($key, 'checked', 'checked');
+                }
+
+                $this->setAttribute($key, 'value', $request->post()->get($name));
+                $fields[$name] = $request->post()->get($name);
             }
         }
 
-        if (null !== $request->post('sign') && $this->getSign() !== $request->post('sign')){
+        if (null !== $request->post()->get('sign') && $this->getSign() !== $request->post()->get('sign')){
             die('Формы не совпадают');
         }
 
         return $fields;
+    }
+
+    public function setAttribute($key, $attrName, $attrValue)
+    {
+        $this->fields[$key][$attrName] = $attrValue;
     }
 
     public function getSign()
@@ -80,7 +90,7 @@ abstract class Form
         foreach ($this->fields as $key => $field) {
             $name = $field['name'] ? $field['name'] : null;
             if(isset($errors[$name])) {
-                $this->fields[$key]['errors'] = $errors[$name];
+                $this->setAttribute($key, 'errors', $errors[$name]);
             }
         }
     }

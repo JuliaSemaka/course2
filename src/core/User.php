@@ -2,29 +2,38 @@
 
 namespace JuliaYatsko\course2\core;
 
+use JuliaYatsko\course2\core\http\Response;
 use JuliaYatsko\course2\models\SessionModel;
 use JuliaYatsko\course2\models\UsersModel;
 use JuliaYatsko\course2\core\Exception\ModelIncorrectDataException;
-use JuliaYatsko\course2\core\Request;
-use JuliaYatsko\course2\core\Response;
+use JuliaYatsko\course2\core\http\Request;
+use JuliaYatsko\course2\core\http\Session;
+use JuliaYatsko\course2\core\http\Cookie;
+use JuliaYatsko\course2\models\RoleModel;
 
 class User
 {
     private $mUser;
     private $mSession;
+    private $mRole;
+    private $session;
     private $request;
     private $response;
 
-    public function __construct(UsersModel $mUser, SessionModel $mSession, Request $request)
+    public $current = null;
+
+    public function __construct(UsersModel $mUser, SessionModel $mSession, RoleModel $mRole, Session $session)
     {
         $this->mUser = $mUser;
         $this->mSession = $mSession;
-        $this->request = $request;
+        $this->mRole = $mRole;
+        $this->session = $session;
         $this->response = new Response();
     }
 
     public function signUp(array $fields)
     {
+
         if ($this->mUser->getByUser(sprintf('user_name = \'%s\'', $fields['user_name']))) {
             $errors['user_name'][] = sprintf('%s', 'User with the same name already exists');
             throw new ModelIncorrectDataException($errors);
@@ -35,59 +44,101 @@ class User
             throw new ModelIncorrectDataException($errors);
         }
 
-        $this->mUser->signUp($fields);
+        $id = $this->mUser->signUp($fields);
+
+        //!!!!!!!!!!!2 строки ниже происходит ошибка!!!!!!!
+        $this->mSession->set($this->mSession->getSidHash($fields['user_name']), $id);
+
+        $this->session->collection()->set('sid', $this->mSession->getSid());
+
+        return $id;
     }
 
     public function signIn(array $fields)
     {
         $user = $this->mUser->signIn($fields);
 
-        if (isset($fields['remember']) && isset($fields['user_name']) && isset($fields['user_password'])) {
-            $this->response->setCookie('user', $fields['user_name']);
+        if (isset($fields['remember']) && isset($user['user_name'])) {
+            $cookie = new Cookie('user', $user['user_name'], strtotime('+30 days', time()));
+            $this->response->setCookie($cookie);
         }
 
-        $sid = $this->getSidHash($fields['user_name']);
+        $sid = $this->mSession->getSidHash($user['user_name']);
+
         if (!$this->mSession->getBySid($sid)) {
-            $this->mSession->addSession($sid, $user['id']);
+            $this->mSession->set($sid, $user['id']);
+        } else {
+            $this->mSession->update($sid);
         }
-        if (!$this->request->session('sid')) {
-            $this->response->setSession('sid', $sid);
+
+        if (!$this->session->collection()->get('sid', false)) {
+            $this->session->collection()->set('sid', $this->mSession->getSid());
         }
+
+        return true;
     }
 
-    public function isAuth()
+    public function isAuth(Request $request)
     {
-        $sid = $this->request->session('sid');
-        $cookieUser = $this->request->cookie('user');
+        if ($this->current) {
+            return true;
+        }
 
-        if ($sid) {
-            if (!$this->mSession->getBySid($sid) && $cookieUser) {
-                $user = $this->mUser->getByUser(sprintf('user_name = \'%s\'', $cookieUser));
-                $this->mSession->addSession($sid, $user['id']);
-            }
+        if ($sid = $this->session->collection()->get('sid')) {
+            $this->current = $this->mSession->getBySid($sid);
+        }
+
+        if ($this->current) {
+
+            $this->mSession->update($sid);
 
             return true;
-        } elseif ($cookieUser) {
-            $sid = $this->getSidHash($cookieUser);
-            $user = $this->mUser->getByUser(sprintf('user_name = \'%s\'', $cookieUser));
-            $this->response->setSession('sid', $sid);
+        }
+
+        if ($userName = $request->cookie()->get('user')) {
+
+            $sid = $this->mSession->getSidHash($userName);
+
+            $user = $this->mUser->getByUser(sprintf('user_name = \'%s\'', $userName));
+
+            $this->session->collection()->set('sid', $sid);
 
             if ($user && $sid && !$this->mSession->getBySid($sid)) {
-                $this->mSession->addSession($sid, $user['id']);
+                $this->mSession->set($sid, $user['id']);
             }
 
+            $this->current = $this->mSession->getBySid($sid);
+
             return true;
-        } else {
-            return false;
         }
+
+        return false;
         //SELECT users.id as id, user_name, user_password FROM sessions JOIN users ON sessions.id_user = users.id WHERE sid = '123456789'
     }
 
-    public function getSidHash($sid)
+    public function output()
     {
-        $md5 = md5($sid . UsersModel::MD5_ADD);
-        return substr($md5, 1, 10);
+        $this->session->collection()->remove('sid');
+        unset($_SESSION['sid']);
+
+        $cookie = new Cookie('user', '', strtotime('-100 days', time()));
+        $this->response->setCookie($cookie);
     }
+
+//    public function checkAccess($priv)
+//    {
+//        if (!$this->current) {
+//            return false;
+//        }
+//
+//        return $this->mRole->checkPriv($priv, $this->current['id']);
+//    }
+
+//    public function getSidHash($sid)
+//    {
+//        $md5 = md5($sid . UsersModel::MD5_ADD);
+//        return substr($md5, 1, 10);
+//    }
 
     private function comparePass(array $field)
     {

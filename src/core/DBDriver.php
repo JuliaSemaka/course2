@@ -22,10 +22,10 @@ class DBDriver
         return $fetch === self::FETCH_ALL ? $query->fetchAll() : $query->fetch();
     }
 
-    public function selectJoin($sql)
+    public function selectJoin($sql, $params = null)
     {
         $query = $this->pdo->prepare($sql);
-        $query->execute();
+        isset($params) ? $query->execute($params) : $query->execute();
         return $query->fetch();
     }
 
@@ -51,9 +51,10 @@ class DBDriver
 
         $columns = substr($columns, 0, -2);
 
-        $sql = sprintf('UPDATE %s SET dt=NOW(), %s WHERE %s', $table, $columns, $where);
+        $sql = sprintf('UPDATE %s SET %s WHERE %s', $table, $columns, $where);
 
         $query = $this->pdo->prepare($sql);
+
         $query->execute($params);
     }
 

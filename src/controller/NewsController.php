@@ -16,83 +16,84 @@ class NewsController extends BaseController
     {
         $this->title .= '::список всех статей';
 
-        $mNews = new NewsModel(
-            new DBDriver(DB::db_connect()),
-            new Validator()
-            );
-        $news = $mNews->getAll('is_moderate = \'1\'');
+        $user = $this->container->get('user');
+
+        if (!$user->isAuth($this->request)) {
+            $this->response->redirect('/users/sign_in')->send();
+        }
+
+        $news = $this->container->fabricate('factory-models', 'News')->getAll('is_moderate = \'1\'');
 
         $this->content = $this->build(self::ROOT . 'news.html.php', ['news' => $news]);
     }
 
     public function oneAction()
     {
-        $id = $this->request->get('id');
+        $id = $this->request->get()->get('id');
 
         $this->title = 'Статья №' . $id;
 
-        $mNews = new NewsModel(
-            new DBDriver(DB::db_connect()),
-            new Validator()
-        );
-        $news = $mNews->getById(sprintf('id = \'%s\'', $id));
+        $user = $this->container->get('user');
+
+        if (!$user->isAuth($this->request)) {
+            $this->response->redirect('/users/sign_in')->send();
+        }
+
+        $news = $this->container->fabricate('factory-models', 'News')->getById(sprintf('id = \'%s\'', $id));
 
         $this->content = $this->build(self::ROOT . 'one_news.html.php', ['news' => $news]);
     }
 
     public function editAction()
     {
-        $id = $this->request->get('id');
+        $id = $this->request->get()->get('id');
 
         $this->title = 'Редактирование статьи №' . $id;
 
-        $mNews = new NewsModel(
-            new DBDriver(DB::db_connect()),
-            new Validator()
-        );
+        $user = $this->container->get('user');
 
-
-        if($this->request->isGet()){
-            $news = $mNews->getById(['id' => $id]);
-
-            $this->content = $this->build(self::ROOT . 'edit.html.php', ['news' => $news]);
+        if (!$user->isAuth($this->request)) {
+            $this->response->redirect('/users/sign_in')->send();
         }
 
         if($this->request->isPost()){
-//            var_dump($this->request->getMethod('post', 'title'));
-//            die();
+            $this->container->fabricate('factory-models', 'News')->updateById($id, ['news_title'=>$this->request->post()->get('title'), 'news_content'=>$this->request->post()->get('content')]);
 
-            $mNews->updateById($id, ['news_title'=>$this->request->post('title'), 'news_content'=>$this->request->post('content')]);
+            $this->response->redirect('/')->send();
+        } else {
+            $news = $this->container->fabricate('factory-models', 'News')->getById("id = $id");
 
-            $this->redirect('/news/');
+            $this->content = $this->build(self::ROOT . 'edit.html.php', ['news' => $news]);
         }
 
     }
 
     public function newAction()
     {
-        if($this->request->isGet()) {
+        $user = $this->container->get('user');
+
+        if (!$user->isAuth($this->request)) {
+            $this->response->redirect('/users/sign_in')->send();
+        }
+
+        if(!$this->request->isPost()) {
             $this->title = 'Новая статья';
             $this->content = $this->build(self::ROOT . 'add_new.html.php');
         }
 
         if($this->request->isPost()){
 
-            $mNews = new NewsModel(
-                new DBDriver(DB::db_connect()),
-                new Validator()
-            );
-
             try {
-                $news = $mNews->addNew(['news_title' => $this->request->post('title'), 'news_content' => $this->request->post('content')]);
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                $news = $this->container->fabricate('factory-models', 'News')->addNew(['news_title' => $this->request->post()->get('title'), 'news_content' => $this->request->post()->get('content')]);
 
-                $this->redirect(sprintf('/news/one/%s', $news));
+                $this->response->redirect(sprintf('/news/one/%s', $news))->send();
             } catch (ModelIncorrectDataException $e) {
                 $this->title = 'Ошибка';
                 $err['message'] = $e->getMessage();
                 $err['trace'] = $e->getTrace();
                 $err['errors'] = $e->getErrors();
-                $this->content = $this->build(self::ROOT . 'sign_up.html.php', ['err' => $err]);
+                $this->content = $this->build(self::ROOT . 'add_new.html.php', ['err' => $err]);
             }
         }
     }

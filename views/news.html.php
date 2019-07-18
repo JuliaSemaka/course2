@@ -22,4 +22,4 @@
     </table>
 <?endif;?>
 <a href="/news/new">Добавить новую статью</a><br>
-<a href="/auth">Выход</a><br>
+<a href="/users/sign_in">Выход</a><br>

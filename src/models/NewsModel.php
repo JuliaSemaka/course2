@@ -39,5 +39,5 @@ class NewsModel extends BaseModel
         $this->validator->setRules($this->schema);
     }
 
-
+////////////  $columns : dt=NOW(),
 }

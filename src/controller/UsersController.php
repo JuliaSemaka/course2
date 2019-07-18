@@ -2,6 +2,7 @@
 
 namespace JuliaYatsko\course2\controller;
 
+use http\Cookie;
 use JuliaYatsko\course2\forms\SignIn;
 use JuliaYatsko\course2\core\Exception\ModelIncorrectDataException;
 use JuliaYatsko\course2\forms\SignUp;
@@ -17,6 +18,7 @@ class UsersController extends BaseController
         $formBuilder = new FormBuilder($form);
 
         if($this->request->isPost()){
+            $handled = $form->handleRequest($this->request);
 
 //            $mUsers = new UsersModel(
 //                $this->container->get('db-driver'),
@@ -30,17 +32,18 @@ class UsersController extends BaseController
 //            $mSession = $this->container->fabricate('factory-models', 'SessionModel');
 //            $user = new User($mUsers, $mSession, $this->request);
 
-            $user = $this->container->fabricate('user', $this->request);
-
             try {
-                $user->signUp($form->handleRequest($this->request));
-                $this->redirect('/');
+                $this->container->get('user')->signUp($handled);
+                $this->response->redirect('/')->send();
             } catch (ModelIncorrectDataException $e) {
                 $form->addErrors($e->getErrors());
             }
         }
 
-        $this->content = $this->build(NewsController::ROOT . 'sign_up.html.php', ['form' => $formBuilder]);
+        $this->content = $this->build(
+            NewsController::ROOT . 'sign_up.html.php',
+            ['form' => $formBuilder]
+        );
     }
 
     public function signInAction()
@@ -53,24 +56,23 @@ class UsersController extends BaseController
 //        $mUsers = $this->container->fabricate('factory-models', 'UsersModel');
 //        $mSession = $this->container->fabricate('factory-models', 'SessionModel');
 
-        $user = $this->container->fabricate('user', $this->request);
-
-        if ($user->isAuth()) {
-//            $this->redirect('/');
-        }
+        $user = $this->container->get('user');
+        $user->output();
 
         if($this->request->isPost()){
-
-//            $user->isAuth($this->request);
+            $handled = $form->handleRequest($this->request);
 
             try {
-                $user->signIn($form->handleRequest($this->request));
-                $this->redirect('/');
+                $user->signIn($handled);
+                $this->response->redirect('/')->send();
             } catch (ModelIncorrectDataException $e) {
                 $form->addErrors($e->getErrors());
             }
         }
 
-        $this->content = $this->build(NewsController::ROOT . 'sign_in.html.php', ['form' => $formBuilder]);
+        $this->content = $this->build(
+            NewsController::ROOT . 'sign_in.html.php',
+            ['form' => $formBuilder]
+        );
     }
 }
